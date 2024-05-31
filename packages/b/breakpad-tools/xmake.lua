@@ -5,7 +5,8 @@ package("breakpad-tool")
 
     add_urls("https://github.com/getsentry/breakpad-tools.git")
     add_versions("2020.07.16", "abcafc115e6130c009c3b2efae12ff6ffcc1d539")
-
+    add_patches("2020.07.16","patches/2020.07.16/fixlinux.patch")
+    
     on_install("linux", function(package)
         os.cd("linux")
         local configs = {}
