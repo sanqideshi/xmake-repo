@@ -30,7 +30,7 @@ package("7z")
         os.cd("CPP/7zip/Bundles/Alone2")
         os.vrun("make -j -f makefile.gcc")
 
-        local bin = package:installdir("bin")
+        local bin = talldir("bin")
         os.cp("_o/7zz", bin)
         os.ln(bin .. "/7zz", bin .. "/7z")
     end)

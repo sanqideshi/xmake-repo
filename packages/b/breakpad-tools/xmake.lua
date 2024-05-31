@@ -1,6 +1,6 @@
 package("breakpad-tools")
     set_homepage("https://github.com/getsentry/breakpad-tools")
-    set_description("Crashpad is a crash-reporting system.")
+    set_description("breakpad tools bins,for example:minidump_stackwalk")
     set_license("Apache-2.0")
 
     add_urls("https://github.com/getsentry/breakpad-tools.git")
@@ -10,15 +10,17 @@ package("breakpad-tools")
     on_install("linux", function(package)
         os.cd("linux")
         local configs = {}
-        import("package.tools.make").install(package, configs)
-        -- package:addenv("PATH", "bin")
+        import("package.tools.make").build(package, configs)
+        os.cp("build/*",package:installdir("bin"))
+        package:addenv("PATH", "bin")
     end)
 
     on_install("windows|x86", "windows|x64", function(package)
         os.cd("windows")
         local configs = {}
-        import("package.tools.make").install(package, configs)
-        -- package:addenv("PATH", "bin")
+        import("package.tools.make").build(package, configs)
+        os.cp("build/*",package:installdir("bin"))
+        package:addenv("PATH", "bin")
     end)
 
     on_test(function(package)
