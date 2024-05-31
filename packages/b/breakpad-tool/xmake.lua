@@ -1,4 +1,4 @@
-package("crashpad")
+package("breakpad-tool")
     set_homepage("https://github.com/getsentry/breakpad-tools")
     set_description("Crashpad is a crash-reporting system.")
     set_license("Apache-2.0")
