@@ -12,6 +12,7 @@ package("breakpad-tools")
         local configs = {}
 
         import("package.tools.make").build(package, configs)
+        
         os.cp("build/*",package:installdir("bin"))
         package:addenv("PATH", "bin")
     end)
