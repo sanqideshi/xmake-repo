@@ -10,6 +10,7 @@ package("breakpad-tools")
     on_install("linux", function(package)
         os.cd("linux")
         local configs = {}
+
         import("package.tools.make").build(package, configs)
         os.cp("build/*",package:installdir("bin"))
         package:addenv("PATH", "bin")
@@ -18,6 +19,7 @@ package("breakpad-tools")
     on_install("windows|x86", "windows|x64", function(package)
         os.cd("windows")
         local configs = {}
+        
         import("package.tools.make").build(package, configs)
         os.cp("build/*",package:installdir("bin"))
         package:addenv("PATH", "bin")
