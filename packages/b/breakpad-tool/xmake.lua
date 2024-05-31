@@ -6,9 +6,17 @@ package("crashpad")
     add_urls("https://github.com/getsentry/breakpad-tools.git")
     add_versions("2020.07.16", "abcafc115e6130c009c3b2efae12ff6ffcc1d539")
 
-    on_install("linux", "windows|x86", "windows|x64", function(package)
+    on_install("linux", function(package)
+        os.cd("linux")
         local configs = {}
-        import("package.tools.cmake").install(package, configs)
+        import("package.tools.make").install(package, configs)
+        -- package:addenv("PATH", "bin")
+    end)
+
+    on_install("windows|x86", "windows|x64", function(package)
+        os.cd("windows")
+        local configs = {}
+        import("package.tools.make").install(package, configs)
         -- package:addenv("PATH", "bin")
     end)
 
