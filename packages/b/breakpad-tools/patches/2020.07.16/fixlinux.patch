@@ -1,7 +1,7 @@
-diff --git a/src/client/linux/handler/exception_handler.cc b/src/client/linux/handler/exception_handler.cc
+diff --git a/deps/breakpad/src/client/linux/handler/exception_handler.cc b/deps/breakpad/src/client/linux/handler/exception_handler.cc
 index a41e8c58..9bfca7d2 100644
---- a/src/client/linux/handler/exception_handler.cc
-+++ b/src/client/linux/handler/exception_handler.cc
+--- a/deps/breakpad/src/client/linux/handler/exception_handler.cc
++++ b/deps/breakpad/src/client/linux/handler/exception_handler.cc
 @@ -138,7 +138,7 @@ void InstallAlternateStackLocked() {
    // SIGSTKSZ may be too small to prevent the signal handlers from overrunning
    // the alternative stack. Ensure that the size of the alternative stack is
