@@ -5,7 +5,8 @@ package("breakpad")
     add_urls("https://github.com/google/breakpad/archive/refs/tags/$(version).tar.gz",
              "https://github.com/google/breakpad.git",
              "https://chromium.googlesource.com/breakpad/breakpad.git")
-
+    
+    add_versions("v2023.06.01", "81555be3595e25e8be0fe6dd34e9490beba224296e0a8a858341e7bced67674d")
     add_versions("v2023.01.27", "f187e8c203bd506689ce4b32596ba821e1e2f034a83b8e07c2c635db4de3cc0b")
 
     if is_plat("windows") then
@@ -24,6 +25,10 @@ package("breakpad")
         add_frameworks("CoreFoundation")
     end
 
+    if is_plat("linux") then
+        add_requires("linux-syscall-support")
+    end
+
     add_deps("libdisasm")
 
     on_install("windows|x64", "windows|x86", function (package)
@@ -32,6 +37,15 @@ package("breakpad")
         os.cp(path.join(package:scriptdir(), "port", "xmake.lua"), "xmake.lua")
         import("package.tools.xmake").install(package, configs)
     end)
+
+
+    on_install("linux", function (package)
+        local configs = {}
+        os.vrunv("./configure")
+        import("package.tools.make").install(package, configs)
+    end)
+
+
 
     on_test(function (package)
         local plat
