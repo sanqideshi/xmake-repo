@@ -14,6 +14,12 @@ package("breakpad-tools")
         os.cp("build/*", package:installdir("bin"))
         package:addenv("PATH", "bin")
     end)
+    on_install( "windows|x86", "windows|x64", function(package)
+        os.cd(package:plat())
+        os.run("MSBuild BreakpadTools.sln /p:Configuration=Release /p:Platform=x86 /t:Clean,Build")
+        os.cp("build/*", package:installdir("bin"))
+        package:addenv("PATH", "bin")
+    end)
 
 
     on_test(function(package)
