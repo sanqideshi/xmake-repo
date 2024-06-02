@@ -26,7 +26,6 @@ package("breakpad")
     end
 
     if is_plat("linux") then
-        add_cxflags("-std=c++17")
         add_deps("linux-syscall-support")
         add_includedirs("include/breakpad")
     end
@@ -46,6 +45,7 @@ package("breakpad")
         print("syscall:" .. syscall);
         local syscallh = path.join(syscall,"include","lss")
         os.vrunv("cp",{"-r",syscallh,"src/third_party/"})
+        os.addenvs({CXXFLAGS = "-std=c++17"})
         os.run("./configure --prefix=" .. package:installdir() .. " --exec-prefix=" .. package:installdir())
         import("package.tools.make").install(package)
         package:addenv("PATH", "bin")
