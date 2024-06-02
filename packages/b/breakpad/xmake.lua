@@ -32,12 +32,12 @@ package("breakpad")
 
     add_deps("libdisasm","make")
 
-    on_install("windows|x64", "windows|x86", function (package)
-        io.replace("src/processor/disassembler_x86.h", "third_party/", "", {plain = true})
-        io.replace("src/processor/exploitability_win.cc", "third_party/", "", {plain = true})
-        os.cp(path.join(package:scriptdir(), "port", "xmake.lua"), "xmake.lua")
-        import("package.tools.xmake").install(package, configs)
-    end)
+    -- on_install("windows|x64", "windows|x86", function (package)
+    --     io.replace("src/processor/disassembler_x86.h", "third_party/", "", {plain = true})
+    --     io.replace("src/processor/exploitability_win.cc", "third_party/", "", {plain = true})
+    --     os.cp(path.join(package:scriptdir(), "port", "xmake.lua"), "xmake.lua")
+    --     import("package.tools.xmake").install(package, configs)
+    -- end)
 
 
     on_install("@linux","@msys", function (package)
