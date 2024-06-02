@@ -186,7 +186,7 @@ char* basename(const char*);
 
 #if defined(__ANDROID__)
 #include <stdlib.h>
-#include <unistd.h>
+#include <>
 static inline char *get_current_dir_name(void)
 {
     return getcwd(malloc(PATH_MAX), PATH_MAX);
