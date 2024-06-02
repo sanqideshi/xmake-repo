@@ -8,7 +8,7 @@ package("breakpad")
     -- set_languages("cxx17")
     add_versions("v2023.06.01", "81555be3595e25e8be0fe6dd34e9490beba224296e0a8a858341e7bced67674d")
     add_versions("v2023.01.27", "f187e8c203bd506689ce4b32596ba821e1e2f034a83b8e07c2c635db4de3cc0b")
-
+    
     if is_plat("windows") then
         add_configs("shared", {description = "Build shared binaries.", default = false, type = "boolean", readonly = true})
     end
@@ -26,6 +26,7 @@ package("breakpad")
     end
 
     if is_plat("linux") then
+        add_ldflags("-std=c++17")
         add_deps("linux-syscall-support")
         add_includedirs("include/breakpad")
     end
