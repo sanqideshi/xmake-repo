@@ -26,7 +26,8 @@ package("breakpad")
     end
 
     if is_plat("linux") then
-        add_requires("linux-syscall-support")
+        add_deps("linux-syscall-support")
+        add_includedirs("include/breakpad")
     end
 
     add_deps("libdisasm")
@@ -40,9 +41,14 @@ package("breakpad")
 
 
     on_install("linux", function (package)
-        local configs = {}
-        os.vrunv("./configure")
-        import("package.tools.make").install(package, configs)
+        local syscall = package:dep("linux-syscall-support"):installdir()
+        print("syscall:" .. syscall);
+        local syscallh = path.join(syscall,"include","lss")
+        os.vrunv("cp",{"-r",syscallh,"src/third_party/"})
+        os.run("./configure --prefix=" .. package:installdir() .. " --exec-prefix=" .. package:installdir())
+        import("package.tools.make").install(package)
+        package:addenv("PATH", "bin")
+        package:addenv("PATH", "libexec")
     end)
 
 
