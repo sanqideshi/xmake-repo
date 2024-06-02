@@ -26,7 +26,7 @@ package("breakpad")
     end
 
     if is_plat("linux") then
-        add_ldflags("-std=c++17")
+        add_cxflags("-std=c++17")
         add_deps("linux-syscall-support")
         add_includedirs("include/breakpad")
     end
@@ -41,7 +41,7 @@ package("breakpad")
     -- end)
 
 
-    on_install("@linux","@msys", function (package)
+    on_install("@linux","mingw", function (package)
         local syscall = package:dep("linux-syscall-support"):installdir()
         print("syscall:" .. syscall);
         local syscallh = path.join(syscall,"include","lss")
