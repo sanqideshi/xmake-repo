@@ -30,7 +30,7 @@ package("breakpad")
         add_includedirs("include/breakpad")
     end
 
-    add_deps("libdisasm")
+    add_deps("libdisasm","make")
 
     on_install("windows|x64", "windows|x86", function (package)
         io.replace("src/processor/disassembler_x86.h", "third_party/", "", {plain = true})
@@ -40,7 +40,7 @@ package("breakpad")
     end)
 
 
-    on_install("linux", function (package)
+    on_install("@linux","@msys", function (package)
         local syscall = package:dep("linux-syscall-support"):installdir()
         print("syscall:" .. syscall);
         local syscallh = path.join(syscall,"include","lss")
