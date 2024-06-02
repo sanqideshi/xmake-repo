@@ -45,7 +45,7 @@ package("breakpad")
         print("syscall:" .. syscall);
         local syscallh = path.join(syscall,"include","lss")
         os.vrunv("cp",{"-r",syscallh,"src/third_party/"})
-        os.addenvs({CXXFLAGS = "-std=c++17"})
+        os.vrunv("gcc",{"-v"})
         os.run("./configure --prefix=" .. package:installdir() .. " --exec-prefix=" .. package:installdir())
         import("package.tools.make").install(package)
         package:addenv("PATH", "bin")
